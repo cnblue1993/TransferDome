@@ -196,10 +196,12 @@ public class MainActivity extends Activity {
 					proDia.show();
 					break;
 				case Tools.PROGRESS_FLUSH:
+					System.out.println("main  progress flush");
 					int i0 = (int) ((Tools.sendProgress / (fileSize)) * 100);
 					proDia.setProgress(i0);
 					break;
 				case Tools.PROGRESS_COL:// 关闭进度条
+					
 					proDia.dismiss();
 					break;
 			}
@@ -223,11 +225,15 @@ public class MainActivity extends Activity {
 				m1.what = Tools.FILE_JINDU;
 				m1.obj = "接收文件" + Tools.sign + "正在接收：" + Tools.newfileName
 						+ Tools.sign + Tools.newfileSize;
+				
 				handler.sendMessage(m1);
 				fileProgress();// 启动进度条线程
+				
 				// 发送消息 让对方开始发送文件
 				Msg msg=new Msg(0,Tools.me.getName(), Tools.me.getIp(), m.getSendUser(), m.getSendUserIp(),Tools.CMD_FILEACCEPT, null);
+				
 				tools.sendMsg(msg);
+				
 				return;
 			}
 		})
@@ -246,6 +252,7 @@ public class MainActivity extends Activity {
 			new Thread() {
 				public void run() {
 					while (Tools.sendProgress != -1) {
+						System.out.println("file fileprogress");
 						Message m = new Message();
 						m.what = Tools.PROGRESS_FLUSH;
 						handler.sendMessage(m);

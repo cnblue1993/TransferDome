@@ -14,7 +14,7 @@ import com.example.model.Tools;
 public class FileActivity extends Activity{
 
 	private Button btn_send;
-	private String choosePath = "/sdcard/ShareFiles/Cutpicture/1.png";
+	private String choosePath = "/sdcard/ShareFiles/2.m4a";
 	//private String choosePath = "/sdcard/DCIM/1.jpg";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

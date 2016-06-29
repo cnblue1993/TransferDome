@@ -77,6 +77,7 @@ public class ChatActivity extends Activity {
 				case Tools.FILE_JINDU:
 					String[] pi = ((String) msg.obj).split(Tools.sign);
 					fileSize = Double.parseDouble(pi[2]);
+		
 					proDia.setTitle(pi[0]);// 设置标题
 					proDia.setMessage(pi[1] + " 大小："
 							+ FileActivity.getFormatSize(fileSize));// 设置显示信息
@@ -84,6 +85,7 @@ public class ChatActivity extends Activity {
 					proDia.show();
 					break;
 				case Tools.PROGRESS_FLUSH:
+					System.out.println("char progress flush");
 					int i0 = (int) ((Tools.sendProgress / (fileSize)) * 100);
 					proDia.setProgress(i0);
 					break;

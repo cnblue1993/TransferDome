@@ -26,7 +26,7 @@ public class Msg implements Serializable{
 			this.receiveUser = receiveUser;
 			this.receiveUserIp  = receiveUserIp;
 			this.MsgType = MsgType;
-			this.body = body;
+			this.body = object;
 		}
 		public long getPackId() {
 			return packId;

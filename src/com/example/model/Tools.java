@@ -98,7 +98,6 @@ public class Tools {
 	// 发送消息
 		public void sendMsg(Msg msg)
 		{
-			System.out.println("sendMsg");
 			(new UdpSend(msg)).start();
 		}
 		// 发送消息线程
@@ -109,7 +108,6 @@ public class Tools {
 			}
 
 			public void run() {
-				System.out.println("sendthread");
 				try {
 					byte[] data = Tools.toByteArray(msg);
 					DatagramSocket ds = new DatagramSocket(Tools.PORT_SEND);
@@ -129,7 +127,6 @@ public class Tools {
 		// 接收消息
 		public void receiveMsg()
 		{
-			System.out.println("receiceMsg");
 			new UdpReceive().start();
 		}
 		// 接收消息线程
@@ -141,7 +138,6 @@ public class Tools {
 				//消息循环
 				while(true)
 				{
-					System.out.println("receiceThread");
 					try {
 						DatagramSocket ds = new DatagramSocket(Tools.PORT_RECEIVE);
 						byte[] data = new byte[1024 * 4];
@@ -193,7 +189,6 @@ public class Tools {
 		public void parse(Msg msg)
 		{
 			switch (msg.getMsgType()) {
-			System.out.println("parse+"+msg);
 			case Tools.CMD_FILEACCEPT:
 				//收到确认接受
 				String path = Tools.chart.choosePath;
@@ -212,15 +207,11 @@ public class Tools {
 				
 			case Tools.CMD_FILEREQUEST:
 				//收到传送文件请求
-				System.out.println(msg.getReceiveUser() + msg.getSendUser());
-				System.out.println(msg.getBody());
 				Tools.out("收到文件传送请求");
 				System.out.println("收到文件传送请求");
 				String[] newfileInfo = ((String) msg.getBody()).split(Tools.sign);
 				Tools.newfileName = newfileInfo[0];// 记录下文件名称
 				Tools.newfileSize = Long.parseLong(newfileInfo[1].trim());// 文件大小
-				System.out.println("收到文件名称："+Tools.newfileName);
-				System.out.println("收到文件大小："+Tools.newfileSize);
 				if(Tools.State==Tools.MAINACTIVITY)
 				{
 					System.out.println("正在main界面");
@@ -377,8 +368,9 @@ public class Tools {
 		public void fileProgress() {
 			new Thread() { 
 				public void run() {
-					
+	
 					while (Tools.sendProgress != -1) {
+						System.out.println("tools fileprogress");
 						 Message m = new Message();
 							m.what = Tools.PROGRESS_FLUSH;
 						Tools.chart.handler.sendMessage(m);
